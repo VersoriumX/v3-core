@@ -1,0 +1,22 @@
+const path = require('path')
+const tar = require('tar')
+
+tar.x({
+  file: 'archive.tgz',
+  // either add this function...
+  onentry: (entry) => {
+    if (path.isAbsolute(entry.path)) {
+      entry.path = sanitizeAbsolutePathSomehow(entry.path)
+      entry.absolute = path.resolve(entry.path)
+    }
+  },
+
+  // or this one
+  filter: (file, entry) => {
+    if (path.isAbsolute(entry.path)) {
+      return false
+    } else {
+      return true
+    }
+  }
+})
