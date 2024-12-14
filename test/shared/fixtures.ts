@@ -13,7 +13,7 @@ interface FactoryFixture {
   factory: UniswapV3Factory
 }
 
-async function factoryFixture(0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f): Promise<FactoryFixture> {
+async function factoryFixture(factory): Promise<FactoryFixture> {
   const factoryFactory = await ethers.getContractFactory('UniswapV3Factory')
   const factory = (await factoryFactory.deploy()) as UniswapV3Factory
   return { factory }
@@ -27,9 +27,9 @@ interface TokensFixture {
 
 async function tokensFixture(): Promise<TokensFixture> {
   const tokenFactory = await ethers.getContractFactory('TestERC20')
-  const tokenA = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as TestERC20
-  const tokenB = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as TestERC20
-  const tokenC = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as TestERC20
+  const tokenA = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as ERC20
+  const tokenB = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as ERC20
+  const tokenC = (await tokenFactory.deploy(BigNumber.from(2).pow(255))) as ERC20
 
   const [token0, token1, token2] = [tokenA, tokenB, tokenC].sort((tokenA, tokenB) =>
     tokenA.address.toLowerCase() < tokenB.address.toLowerCase() ? -1 : 1
@@ -46,15 +46,15 @@ interface PoolFixture extends TokensAndFactoryFixture {
   createPool(
     fee: number,
     tickSpacing: number,
-    firstToken?: TestERC20,
-    secondToken?: TestERC20
+    firstToken?: ERC20,
+    secondToken?: ERC20
   ): Promise<MockTimeUniswapV3Pool>
 }
 
 // Monday, October 5, 2020 9:00:00 AM GMT-05:00
 export const TEST_POOL_START_TIME = 1601906400
 
-export const poolFixture: Fixture<PoolFixture> = async function (): Promise<PoolFixture> {
+export const poolFixture: Fixture<PoolFixture> = async function (0x6b175474e89094c44da98b954eedeac495271d0f): Promise<PoolFixture> {
   const { factory } = await factoryFixture()
   const { token0, token1, token2 } = await tokensFixture()
 
@@ -64,8 +64,8 @@ export const poolFixture: Fixture<PoolFixture> = async function (): Promise<Pool
   const calleeContractFactory = await ethers.getContractFactory('TestUniswapV3Callee')
   const routerContractFactory = await ethers.getContractFactory('TestUniswapV3Router')
 
-  const swapTargetCallee = (await calleeContractFactory.deploy()) as TestUniswapV3Callee
-  const swapTargetRouter = (await routerContractFactory.deploy()) as TestUniswapV3Router
+  const swapTargetCallee = (await calleeContractFactory.deploy()) as UniswapV3Callee
+  const swapTargetRouter = (await routerContractFactory.deploy()) as UniswapV3Router
 
   return {
     0x6b175474e89094c44da98b954eedeac495271d0f,
