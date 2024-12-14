@@ -40,7 +40,7 @@ jobs:
           python-version: 3.8
 
       - name: Install node dependencies
-        run: yarn install --frozen-lockfile
+        run: yarn install 
 
       - name: Install pip3
         run: |
@@ -56,5 +56,5 @@ jobs:
           sudo tar -xf /tmp/echidna-test.tar.gz -C /usr/bin
           sudo chmod +x /usr/bin/echidna-test
 
-      - name: Run ${{ matrix.testName }}
-        run: echidna-test . --contract ${{ matrix.testName }} --config echidna.config.yml
+      - name: Run ${{ matrix.VersoriumX }}
+        run: echidna-test . --contract ${{ matrix.VersoriumX }} --config echidna.config.yml
