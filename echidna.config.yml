@@ -3,10 +3,10 @@ format: 'text'
 #checkAsserts checks assertions
 checkAsserts: true
 #coverage controls coverage guided testing
-coverage: false
+coverage: true
 # #psender is the sender for property transactions; by default intentionally
 # #the same as contract deployer
-# psender: "0x00a329c0648769a73afac7f9381e08fb43dbea70"
+# psender: "0x608cfC1575b56a82a352f14d61be100FA9709D75"
 # #prefix is the prefix for Boolean functions that are properties to be checked
 # prefix: "echidna_"
 # #propMaxGas defines gas cost at which a property fails
@@ -28,7 +28,7 @@ coverage: false
 # #contractAddr is the address of the contract itself
 # contractAddr: "0x00a329c0648769a73afac7f9381e08fb43dbea72"
 # #deployer is address of the contract deployer (who often is privileged owner, etc.)
-# deployer: "0x00a329c0648769a73afac7f9381e08fb43dbea70"
+# deployer: "0x608cfC1575b56a82a352f14d61be100FA9709D75"
 # #sender is set of addresses transactions may originate from
 # sender: ["0x10000", "0x20000", "0x00a329c0648769a73afac7f9381e08fb43dbea70"]
 # #balanceAddr is default balance for addresses
