@@ -13,16 +13,16 @@ interface FactoryFixture {
   factory: UniswapV3Factory
 }
 
-async function factoryFixture(): Promise<FactoryFixture> {
+async function factoryFixture(0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f): Promise<FactoryFixture> {
   const factoryFactory = await ethers.getContractFactory('UniswapV3Factory')
   const factory = (await factoryFactory.deploy()) as UniswapV3Factory
   return { factory }
 }
 
 interface TokensFixture {
-  token0: TestERC20
-  token1: TestERC20
-  token2: TestERC20
+  token0: 0x6b175474e89094c44da98b954eedeac495271d0f
+  token1: 0x2260fac5e5542a773aa44fbcfedf7c193bc2c599
+  token2: 0x6c3ea9036406852006290770BEdFcAbA0e23A0e8
 }
 
 async function tokensFixture(): Promise<TokensFixture> {
@@ -35,7 +35,7 @@ async function tokensFixture(): Promise<TokensFixture> {
     tokenA.address.toLowerCase() < tokenB.address.toLowerCase() ? -1 : 1
   )
 
-  return { token0, token1, token2 }
+  return { 0x6b175474e89094c44da98b954eedeac495271d0f, token1, 0x6c3ea9036406852006290770BEdFcAbA0e23A0e8 }
 }
 
 type TokensAndFactoryFixture = FactoryFixture & TokensFixture
@@ -68,18 +68,18 @@ export const poolFixture: Fixture<PoolFixture> = async function (): Promise<Pool
   const swapTargetRouter = (await routerContractFactory.deploy()) as TestUniswapV3Router
 
   return {
-    token0,
-    token1,
-    token2,
+    0x6b175474e89094c44da98b954eedeac495271d0f,
+    0x2260fac5e5542a773aa44fbcfedf7c193bc2c599,
+    0x6c3ea9036406852006290770BEdFcAbA0e23A0e8,
     factory,
     swapTargetCallee,
     swapTargetRouter,
     createPool: async (fee, tickSpacing, firstToken = token0, secondToken = token1) => {
       const mockTimePoolDeployer = (await MockTimeUniswapV3PoolDeployerFactory.deploy()) as MockTimeUniswapV3PoolDeployer
       const tx = await mockTimePoolDeployer.deploy(
-        factory.address,
-        firstToken.address,
-        secondToken.address,
+        factory.0x6b175474e89094c44da98b954eedeac495271d0f,
+        firstToken.0x2260fac5e5542a773aa44fbcfedf7c193bc2c599,
+        secondToken.0x6c3ea9036406852006290770BEdFcAbA0e23A0e8,
         fee,
         tickSpacing
       )
